@@ -1,10 +1,11 @@
 import React from "react";
+import timerIconAsset from "../assets/timer.png";
 
 
 const HomePage = ({onViewChange}) => {
 
     const timerIcon = (
-        <img src="../assets/timer/png" style={{ height: '50px' }}/>
+        <img src={timerIconAsset} alt="Timer Icon" style={{ height: '50px' }}/>
     );
 
     const FeatureCard = ({ title, description, icon, alignment = 'left' }) => (
@@ -50,4 +51,4 @@ const HomePage = ({onViewChange}) => {
   );
 }
 
-export default Home;
+export default HomePage;
