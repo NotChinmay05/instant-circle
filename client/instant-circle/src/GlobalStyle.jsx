@@ -40,6 +40,7 @@ export default function GlobalStyle (){
                 margin-right: auto;
                 padding-left: 5px;
                 padding-right: 5px;
+                
             }
 
             .nav {
@@ -52,8 +53,6 @@ export default function GlobalStyle (){
                 position: sticky;
             }
 
-            .home{display: flex; flex-direction: column; justify-content: center; align-items: center}
-
 
             .feature-card {
               padding: 1.5rem;
@@ -63,23 +62,16 @@ export default function GlobalStyle (){
               color: var(--text-white);
               margin: 1.5rem 1rem;
               transition: transform 0.3s ease;
-              width: 1000px
             }
             .feature-card:hover { transform: scale(1.02); }
             .card-content {
               display: flex;
-              justify-content: space-between;
               align-items: center;
-              gap: 10rem;
+              gap: 2rem;
             }
             
             .card-content.left-aligned { justify-content: flex-start; }
             .card-content.right-aligned { justify-content: space-between; }
-            .card-content.left-aligned { flex-direction: row; }
-            .card-content.right-aligned { 
-              flex-direction: row-reverse;
-              text-align: right;
-            }
             .card-text-container {
               flex: 1;
             }
