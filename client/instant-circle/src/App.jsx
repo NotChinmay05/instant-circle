@@ -27,7 +27,7 @@ export default function App(){
   return (
     <div className="app-container">
       <GlobalStyle/>
-      <Navbar onViewChange={setView} />
+      <Navbar onViewChange={setView} currentView={view} />
       <main>
         {/* 3. Main content area for the current page */}
         <div className="max-width-wrapper">
