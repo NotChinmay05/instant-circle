@@ -7,17 +7,41 @@ const SignUpPage = ({ onViewChange }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    console.log({
-      username: username,
-      password: password,
-    });
-    // In a real app, you'd send this to a backend to create the user
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Include cookies for authentication
+        body: JSON.stringify({
+          email: username, // Sending username as email for backend compatibility
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Signup successful:', data);
+        // Handle successful signup (e.g., redirect to login, update state)
+        alert('Signup successful! You can now login.');
+        onViewChange('login');
+      } else {
+        console.error('Signup failed:', data.error);
+        alert(data.error || 'Signup failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (

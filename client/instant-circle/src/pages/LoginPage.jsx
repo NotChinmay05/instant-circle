@@ -5,13 +5,36 @@ const LoginPage = ({ onViewChange }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault(); // Prevents the page from reloading on form submission
-    console.log({
-      username: username,
-      password: password,
-    });
-    // In a real application, you would send these credentials to your backend for verification
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies for authentication
+        body: JSON.stringify({
+          email: username, // Sending username as email for backend compatibility
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Login successful:", data);
+        // Handle successful login (e.g., redirect, update state)
+        alert("Login successful!");
+      } else {
+        console.error("Login failed:", data.error);
+        alert(data.error || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
